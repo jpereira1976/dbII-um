@@ -31,22 +31,9 @@ public class JDBCExample {
         configuration.setProperty("hibernate.connection.password", "geocom");
         configuration.addAnnotatedClass(Example.class);
         configuration.setProperty("hibernate.show_sql", "true");
-        configuration.configure();
 
 
-        ServiceRegistry registry
-        = new StandardServiceRegistryBuilder()
-            .applySettings(configuration.getProperties()).build();
-    	SessionFactory sessionFactory = null;
-    	try {
-    		sessionFactory = configuration.buildSessionFactory(registry);
-    	}
-    	catch (Exception e) {
-    		// The registry would be destroyed by the SessionFactory, but we had trouble building the SessionFactory
-    		// so destroy it manually.
-    		StandardServiceRegistryBuilder.destroy( registry );
-
-    	}
+    	SessionFactory sessionFactory = configuration.buildSessionFactory();
     	
     	try (Session session = sessionFactory.openSession()) {
     		Example example = session.get(Example.class, Integer.valueOf(1));
