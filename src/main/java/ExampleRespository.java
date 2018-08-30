@@ -5,4 +5,6 @@ public interface ExampleRespository {
 
 	List<Example> allExamples() throws SQLException;
 
+	void save(Example example) throws SQLException;
+
 }

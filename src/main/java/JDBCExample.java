@@ -8,7 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
+import org.hibernate.cfg.Environment;
 
 public class JDBCExample {
 	ExampleRespository repository;
@@ -24,16 +24,25 @@ public class JDBCExample {
         ds.setUrl(databaseUrl);
         ds.setUsername("root");
         ds.setPassword("geocom");
+        ds.setDefaultAutoCommit(true);
 
         Configuration configuration = new Configuration();
-        configuration.setProperty("hibernate.connection.url", databaseUrl);
-        configuration.setProperty("hibernate.connection.username", "root");
-        configuration.setProperty("hibernate.connection.password", "geocom");
+//        configuration.setProperty("hibernate.connection.url", databaseUrl);
+//        configuration.setProperty("hibernate.connection.username", "root");
+//        configuration.setProperty("hibernate.connection.password", "geocom");
+        configuration.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL57Dialect");
         configuration.addAnnotatedClass(Example.class);
+        //configuration.addResource("Example.hbm.xml");
+        configuration.setProperty("hibernate.schema_update", "true");
+        configuration.setProperty("hibernate.hbm2ddl.auto", "update");
         configuration.setProperty("hibernate.show_sql", "true");
-
-
-    	SessionFactory sessionFactory = configuration.buildSessionFactory();
+        
+    	SessionFactory sessionFactory = configuration
+    		    .buildSessionFactory(
+    		        new StandardServiceRegistryBuilder()
+    		            .applySettings(configuration.getProperties())
+    		            .applySetting(Environment.DATASOURCE, ds)
+    		            .build());
     	
     	try (Session session = sessionFactory.openSession()) {
     		Example example = session.get(Example.class, Integer.valueOf(1));
@@ -42,9 +51,12 @@ public class JDBCExample {
     	HibernateExampleRepository hibernateRepository = new HibernateExampleRepository(sessionFactory);
     	
         JDBCTemplate template = new JDBCTemplate(ds);
-		JDBCExampleRespository jdbcRepository = 
+		ExampleRespository jdbcRepository = 
 				new JDBCExampleRespository(template);
-		new JDBCExample(hibernateRepository).printExamples();	
+		JDBCExample example = new JDBCExample(hibernateRepository);
+		hibernateRepository.save(new Example(null, "Pepe", "Mi direccion"));
+		//jdbcRepository.save(new Example(1, "Juan"));
+		example.printExamples();	
 		System.exit(0);
 	}
 	

@@ -22,16 +22,17 @@ public class JDBCExampleRespository implements ExampleRespository {
 						"select * from example");
 				ResultSet rs=stmt.executeQuery(); 
 				while(rs.next())  
-					result.add(new Example(rs.getInt("id"), rs.getString("nombre")));  
+					result.add(new Example(rs.getInt("id"), rs.getString("nombre"), rs.getString("address")));  
 			return result;
 		});
 		
 	}
 	
+	@Override
 	public void save(Example example) throws SQLException {
 		template.execute(con -> {
 			PreparedStatement stmt = con.prepareStatement(
-					"insert into example (id, name) values(?,?)");
+					"insert into example (id, nombre) values(?,?)");
 			stmt.setInt(1, example.getId());
 			stmt.setString(2, example.getName());
 			return stmt.execute(); 

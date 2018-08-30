@@ -1,0 +1,9 @@
+<hibernate-mapping>
+	<class name="Example" table="example">
+		<id name="id" >
+			<generator class="assigned" />
+		</id>
+		<property name="name" column="nombre" />
+		<property name="address" />
+	</class>
+</hibernate-mapping>

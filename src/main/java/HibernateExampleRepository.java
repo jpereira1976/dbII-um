@@ -19,4 +19,15 @@ public class HibernateExampleRepository implements ExampleRespository {
 		}
 	}
 
+	@Override
+	public void save(Example example) throws SQLException {
+		try (Session session = sessionFactory.openSession()) {
+			session.beginTransaction();
+			
+			session.save(example);		
+			
+			session.getTransaction().commit();
+		}		
+	}
+
 }
