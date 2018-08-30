@@ -25,9 +25,6 @@ class Example {
 	Integer id;
 	@Column(name="nombre", length=40)
 	String name;
-	String addressStreet;
-	String addressNumber;
-	String addressOther;
-	
+ 	String address;	
 	
 }
