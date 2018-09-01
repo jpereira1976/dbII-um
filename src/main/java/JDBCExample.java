@@ -27,9 +27,6 @@ public class JDBCExample {
         ds.setDefaultAutoCommit(true);
 
         Configuration configuration = new Configuration();
-//        configuration.setProperty("hibernate.connection.url", databaseUrl);
-//        configuration.setProperty("hibernate.connection.username", "root");
-//        configuration.setProperty("hibernate.connection.password", "geocom");
         configuration.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL57Dialect");
         configuration.addAnnotatedClass(Example.class);
         //configuration.addResource("Example.hbm.xml");
