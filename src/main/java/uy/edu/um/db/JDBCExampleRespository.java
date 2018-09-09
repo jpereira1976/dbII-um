@@ -1,16 +1,16 @@
+package uy.edu.um.db;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@NoArgsConstructor
 public class JDBCExampleRespository implements ExampleRespository {
-	JDBCTemplate template;
-
-	public JDBCExampleRespository(JDBCTemplate template) {
-		this.template = template;
-	}
+	@Setter JDBCTemplate template;
 	
 	@SuppressWarnings("unchecked")
 	@Override

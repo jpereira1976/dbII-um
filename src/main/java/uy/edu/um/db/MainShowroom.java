@@ -1,3 +1,4 @@
+package uy.edu.um.db;
 import java.util.Arrays;
 
 import org.apache.commons.dbcp2.BasicDataSource;
@@ -20,7 +21,10 @@ public class MainShowroom {
 
 		Configuration configuration = new Configuration();
 		configuration.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL57Dialect");
-		configuration.addResource("ShowroomCars.hbm.xml");
+		//configuration.addResource("ShowroomCars.hbm.xml");
+		configuration.addAnnotatedClass(Showroom.class);
+		configuration.addAnnotatedClass(Car.class);
+		configuration.addResource("CarEngine.hbm.xml");
 		configuration.setProperty("hibernate.schema_update", "true");
 		configuration.setProperty("hibernate.hbm2ddl.auto", "update");
 		configuration.setProperty("hibernate.show_sql", "true");
@@ -30,22 +34,26 @@ public class MainShowroom {
 
 //		try (Session session = sessionFactory.openSession()) {
 //			session.beginTransaction();
-//			session.save(new Showroom(
-//					null, "manager", "location",
+//			Showroom showroom = new Showroom(
+//					null, "manager2", "location2",
 //					Arrays.asList(
 //							new Car(null, "auto1", "rojo"), 
-//							new Car(null, "auto2", "azul"))));
+//							new Car(null, "auto2", "azul")));
+//			session.save(showroom);
+//			session.getTransaction().commit();
+//			System.out.println(showroom);
+//		}
+//		try (Session session = sessionFactory.openSession()) {
+//			session.beginTransaction();
+//			
+//			Showroom showroom = session.get(Showroom.class, 2);
+//			Car car = showroom.getCars().remove(0);
+//			//session.saveOrUpdate(showroom);
+//			System.out.println(showroom);
+//			
+//			System.out.println(car);
+//			
 //			session.getTransaction().commit();
 //		}
-		try (Session session = sessionFactory.openSession()) {
-			session.beginTransaction();
-			
-			Showroom showroom = session.get(Showroom.class, 1);
-			showroom.getCars().remove(0);
-			
-			session.saveOrUpdate(showroom);
-			
-			session.getTransaction().commit();
-		}
 	}
 }

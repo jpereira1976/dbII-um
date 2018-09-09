@@ -1,3 +1,4 @@
+package uy.edu.um.db;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

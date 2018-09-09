@@ -1,0 +1,21 @@
+<hibernate-mapping>
+	<class name="CarWithEngine" table="CAR">
+		<id name="id" column="CAR_ID">
+			<generator class="assigned" />
+		</id>
+		<property name="name" column="NAME" />
+		<property name="color" column="COLOR" />
+		<one-to-one name="engine" class="Engine" cascade="all" />
+	</class>
+
+	<class name="Engine" table="ENGINE">
+		<id name="id" column="CAR_ID">
+			<generator class="foreign">
+				<param name="property">car</param>
+			</generator>
+		</id>
+		<property name="make" />
+		<property name="size" />
+		<one-to-one name="car" class="CarWithEngine" constrained="true" />
+	</class>
+</hibernate-mapping>
