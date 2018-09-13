@@ -5,14 +5,15 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-@Component
+@Repository
+@Profile("hibernate")
 public class HibernateExampleRepository implements ExampleRespository {
 	@Autowired
 	@NonNull private SessionFactory sessionFactory;

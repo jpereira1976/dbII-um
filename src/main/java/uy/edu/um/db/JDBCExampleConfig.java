@@ -53,20 +53,9 @@ public class JDBCExampleConfig {
     		            .build());
 		
 	}
-
-	@Bean
-	JDBCTemplate jdbcTemplate(@Autowired DataSource ds) {
-		return new JDBCTemplate(ds);
-	}
 	
 	@Bean
-	ExampleRespository jdbcRepository(@Autowired JDBCTemplate template) { 
-		JDBCExampleRespository exampleRepository = new JDBCExampleRespository();
-		exampleRepository.setTemplate(template);
-		return exampleRepository;	}
-	
-	@Bean
-	JDBCExample example(@Autowired HibernateExampleRepository repository) { 
+	JDBCExample example(@Autowired ExampleRespository repository) { 
 		return new JDBCExample(repository);
 	}
 	

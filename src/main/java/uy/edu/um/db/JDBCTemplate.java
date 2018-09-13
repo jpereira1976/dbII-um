@@ -4,13 +4,17 @@ import java.sql.SQLException;
 
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import lombok.AllArgsConstructor;
+
+@Component
+@AllArgsConstructor
 public class JDBCTemplate {
+	@Autowired
 	DataSource ds;
-	
-	public JDBCTemplate(DataSource ds) {
-		this.ds = ds;
-	}
-	
+		
 	Object execute(JDBCTemplateCallback callback) throws SQLException {
 		try (Connection con = ds.getConnection()) { 
 			return callback.execute(con);

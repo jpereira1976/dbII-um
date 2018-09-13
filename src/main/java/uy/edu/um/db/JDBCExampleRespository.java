@@ -5,12 +5,18 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Repository;
+
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @NoArgsConstructor
+@Repository
+@Profile("jdbc")
 public class JDBCExampleRespository implements ExampleRespository {
-	@Setter JDBCTemplate template;
+	@Setter @Autowired JDBCTemplate template;
 	
 	@SuppressWarnings("unchecked")
 	@Override
