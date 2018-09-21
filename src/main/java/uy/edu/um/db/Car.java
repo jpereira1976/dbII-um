@@ -1,4 +1,6 @@
 package uy.edu.um.db;
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,11 +17,14 @@ import lombok.NoArgsConstructor;
 @Entity(name="CAR_LIST_ANN")
 @Table(name="CAR_LIST_ANN")
 @AllArgsConstructor
-public class Car {
+public class Car implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
 	@Column(name="CAR_ID")
 	Integer id;
 	String name;
-	String color;
+	transient String color;
 }

@@ -19,7 +19,12 @@ dependencies {
 
    compile group: 'org.springframework', name: 'spring-context', version: '5.0.8.RELEASE'
 
-
+   compile group: 'com.thoughtworks.xstream', name: 'xstream', version: '1.4.10'
+   
+   compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.9.6'
+   
+   compile group: 'commons-io', name: 'commons-io', version: '2.6'
+   
    testImplementation 'junit:junit:4.12'
     
    compileOnly 'org.projectlombok:lombok:1.18.0'
