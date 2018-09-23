@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -17,6 +18,7 @@ import lombok.NoArgsConstructor;
 @Entity(name="CAR_LIST_ANN")
 @Table(name="CAR_LIST_ANN")
 @AllArgsConstructor
+@Builder
 public class Car implements Serializable {
 
 	private static final long serialVersionUID = 1L;

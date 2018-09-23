@@ -9,7 +9,7 @@ public class CarSerializableFileMain {
 
 	public static void main(String[] args) throws Exception {
 		
-		Car car = new Car(1, "auto 1", "rojo");
+		Car car =Car.builder().color("rojo").id(1).name("auto1").build();
 		
 		FileOutputStream bo = new FileOutputStream("car.ser");
 		ObjectOutputStream oos = new ObjectOutputStream(bo);
