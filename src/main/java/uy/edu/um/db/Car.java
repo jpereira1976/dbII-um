@@ -28,5 +28,5 @@ public class Car implements Serializable {
 	@Column(name="CAR_ID")
 	Integer id;
 	String name;
-	transient String color;
+	String color;
 }

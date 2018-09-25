@@ -1,5 +1,8 @@
 package uy.edu.um.db;
 import java.util.Arrays;
+import java.util.List;
+
+import javax.persistence.Query;
 
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.hibernate.Session;
@@ -21,10 +24,8 @@ public class MainShowroom {
 
 		Configuration configuration = new Configuration();
 		configuration.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL57Dialect");
-		//configuration.addResource("ShowroomCars.hbm.xml");
 		configuration.addAnnotatedClass(Showroom.class);
 		configuration.addAnnotatedClass(Car.class);
-		configuration.addResource("CarEngine.hbm.xml");
 		configuration.setProperty("hibernate.schema_update", "true");
 		configuration.setProperty("hibernate.hbm2ddl.auto", "update");
 		configuration.setProperty("hibernate.show_sql", "true");
@@ -32,6 +33,17 @@ public class MainShowroom {
 		SessionFactory sessionFactory = configuration.buildSessionFactory(new StandardServiceRegistryBuilder()
 				.applySettings(configuration.getProperties()).applySetting(Environment.DATASOURCE, ds).build());
 
+		try (Session session = sessionFactory.openSession()) {
+			Query query = session.createQuery("SELECT c from uy.edu.um.db.Showroom s"
+					+ " join s.cars c "
+					+ "where s.id = :showroomId and c.color = :color");
+			query.setParameter("color", "rojo");
+			query.setParameter("showroomId", 1);
+			@SuppressWarnings("unchecked")
+			List<Car> cars = (List<Car>) query.getResultList();
+			cars.forEach(car -> System.out.println(car));
+		}
+		
 //		try (Session session = sessionFactory.openSession()) {
 //			session.beginTransaction();
 //			Showroom showroom = new Showroom(
