@@ -1,11 +1,7 @@
 package uy.edu.um.db;
 
 import java.sql.SQLException;
-import java.text.ParseException;
 import java.util.List;
-
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class JDBCExample {
 	ExampleRespository repository;

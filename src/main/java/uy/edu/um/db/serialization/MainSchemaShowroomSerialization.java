@@ -16,7 +16,7 @@ public class MainSchemaShowroomSerialization {
 		SchemaShowroom showroom = new SchemaShowroom(vehicles);
 		
 		ObjectMapper mapper = new ObjectMapper();
-		//mapper.enableDefaultTyping();
+
 		String jsonShowroom = mapper.writeValueAsString(showroom);
 		System.out.println(jsonShowroom);
 
