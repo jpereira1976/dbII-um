@@ -28,7 +28,10 @@ dependencies {
    testImplementation 'junit:junit:4.12'
     
    compileOnly 'org.projectlombok:lombok:1.18.0'
-  apt "org.projectlombok:lombok:1.18.0"
+   
+   compile group: 'org.mongodb', name: 'mongo-java-driver', version: '3.8.2'
+   
+   apt "org.projectlombok:lombok:1.18.0"
   
 }
 
