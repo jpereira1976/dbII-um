@@ -1,18 +1,24 @@
 package uy.edu.um.db.mongo;
 
+import java.util.Arrays;
+
 import org.bson.Document;
 
 import com.mongodb.MongoClient;
+import com.mongodb.ServerAddress;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 
-public class FirstMainMongo {
+public class FirstReplicasetMainMongo {
 
 	public static void main(String[] args) {
 		
-		try (MongoClient mongoClient = new MongoClient("localhost", 27017)) {
+		try (MongoClient mongoClient = new MongoClient(Arrays.asList(
+				new ServerAddress("localhost", 27017),
+				new ServerAddress("localhost",27018), 
+				new ServerAddress("localhost",27019)))) {
 
 			MongoDatabase database = mongoClient.getDatabase("test");
 			
